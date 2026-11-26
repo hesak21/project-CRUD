@@ -8,7 +8,6 @@ $done       = $pdo->query("SELECT * FROM song_requests WHERE status='Selesai' OR
 
 include __DIR__ . '/includes/header.php';
 ?>
-<meta http-equiv="refresh" content="10">
 
 <main class="max-w-6xl mx-auto px-5 py-10">
   <header class="flex items-center justify-between mb-8">
@@ -67,6 +66,19 @@ include __DIR__ . '/includes/header.php';
       </ul>
     </section>
   </div>
-  <p class="text-xs text-mocha/60 mt-8 text-center">Halaman diperbarui otomatis setiap 10 detik.</p>
+  <p class="text-xs text-mocha/60 mt-8 text-center">Halaman diperbarui otomatis setiap 5 detik.</p>
 </main>
+<script>
+setInterval(async () => {
+  try {
+    const res = await fetch(location.href, { cache: 'no-store' });
+    if (!res.ok) return;
+    const html = await res.text();
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const fresh = doc.querySelector('main');
+    const current = document.querySelector('main');
+    if (fresh && current) current.innerHTML = fresh.innerHTML;
+  } catch (e) { /* abaikan, coba lagi 5 detik berikutnya */ }
+}, 5000);
+</script>
 <?php include __DIR__ . '/includes/footer.php'; ?>

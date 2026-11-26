@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS song_requests (
   song_title  VARCHAR(150) NOT NULL,
   artist_name VARCHAR(150) NOT NULL,
   message     VARCHAR(255) DEFAULT NULL,
+  cover_url   VARCHAR(255) DEFAULT NULL,
   status      ENUM('Antrean','Diputar','Selesai') NOT NULL DEFAULT 'Antrean',
   created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   INDEX idx_status (status)
@@ -14,5 +15,5 @@ CREATE TABLE IF NOT EXISTS song_requests (
 
 INSERT INTO song_requests (song_title, artist_name, message, status) VALUES
 ('Fix You', 'Coldplay', 'Buat yang lagi kangen rumah', 'Diputar'),
-('Banda Neira - Sampai Jadi Debu', 'Banda Neira', 'Untuk dia yang duduk di pojok', 'Antrean'),
+('Sampai Jadi Debu', 'Banda Neira', 'Untuk dia yang duduk di pojok', 'Antrean'),
 ('Lovely Day', 'Bill Withers', NULL, 'Antrean');
